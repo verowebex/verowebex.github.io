@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #FFFFFF;
+        }
+
+        header {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        header img {
+            width: 200px;
+            height: auto;
+        }
+
+        h1 {
+            font-size: 20px;
+            color: black;
+            margin-bottom: 20px;
+        }
+
+        .info-section {
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .info-section div {
+            margin-bottom: 10px;
+        }
+
+        input, button {
+            margin-top: 10px;
+        }
+
+        table {
+            width: 60%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.9em;
+            margin-left: 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 4px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Estilos del formulario emergente */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .modal input {
+            margin: 5px 0;
+            padding: 8px;
+            width: 100%;
+        }
+
+        .modal button {
+            background-color: #04AA6D;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .modal button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://cdn.glitch.global/cb173b7c-c470-4277-be45-91d99dc6dd1c/logo.jpg?v=1747689308978">
+    </header>
+    <h1>Buscar Cliente</h1>
+    <input type="text" id="customerId" placeholder="ID del Cliente">
+    <button onclick="searchCustomer()">Buscar</button>
+
+    <div id="customerData" class="info-section"></div>
+
+
+    <!-- Mostrar los créditos contratados -->
+    <h1>Productos Comprados</h1>
+    <div id="creditSection" class="info-section" style="display: none;">
+        <table id="creditTable">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                  <th>Costo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se mostrarán los créditos contratados -->
+            </tbody>
+        </table>
+    </div>
+  
+   
+
+    <script>
+        let currentCustomer = null; // Para almacenar los datos del cliente
+
+        // Función para buscar cliente
+        async function searchCustomer() {
+            const customerId = document.getElementById('customerId').value;
+            const customerDataDiv = document.getElementById('customerData');
+            customerDataDiv.innerHTML = 'Buscando...';
+
+            try {
+                // Simulación de la búsqueda de datos del cliente
+                const customers = await fetch('https://6826126e397e48c91314e399.mockapi.io/Clientes')
+                    .then(response => response.json());
+
+                currentCustomer = customers.find(c => c.idcliente == customerId);
+
+                if (currentCustomer) {
+                    customerDataDiv.innerHTML = `
+                        <div><strong>Nombre:</strong> ${currentCustomer.nombre}</div>
+                        <div><strong>Correo Electrónico:</strong> ${currentCustomer.correo}</div>
+                        <div><strong>Teléfono:</strong> ${currentCustomer.telefono}</div>
+                        <div><strong>Fecha de Nacimiento:</strong> ${currentCustomer.fechanacimiento}</div>
+                        <div><strong>ID del Cliente:</strong> ${currentCustomer.idcliente}</div>
+                        <div><strong>CP:</strong> ${currentCustomer.zip}</div>
+                        <div><strong>Último Pedido:</strong> ${currentCustomer.farmaciaorden}</div>
+                         <div><strong>Fecha Pedido:</strong> ${currentCustomer.fechacompra}</div>
+        
+                    `;
+
+                    showCreditSection(); // Muestra los créditos
+                   displayCustomerCredits(); // Muestra los créditos contratados
+                  
+                    //showCardSection(); // Muestra las citas
+                  //displayCustomerCards(); // Muestra las citas
+                } else {
+                    customerDataDiv.innerHTML = 'Cliente no encontrado.';
+                }
+            } catch (error) {
+                customerDataDiv.innerHTML = 'Error al obtener los datos del cliente.';
+                console.error('Error:', error);
+            }
+        }
+
+        // Función para mostrar las tarjetas
+        function showCardSection() {
+            document.getElementById('cardSection').style.display = 'block';
+        }
+
+        // Función para mostrar los créditos
+        function showCreditSection() {
+            document.getElementById('creditSection').style.display = 'block';
+        }
+
+        // Función para mostrar las tarjetas del cliente
+        function displayCustomerCards() {
+            const cardTable = document.getElementById('cardTable').getElementsByTagName('tbody')[0];
+            cardTable.innerHTML = ''; // Limpiar tabla
+            
+
+        currentCustomer = customers.find(c => c.idcliente == customerId);
+            if (currentCustomer && currentCustomer.productos) {
+                currentCustomer.productos.forEach(productos => {
+                    const row = cardTable.insertRow();
+                    row.insertCell(0).textContent = productos.producto;
+                    row.insertCell(1).textContent = productos.cantidad;
+                    row.insertCell(2).textContent = productos.costo;
+                });
+            }
+        }
+
+        // Función para mostrar los créditos contratados del cliente
+        function displayCustomerCredits() {
+            const creditTable = document.getElementById('creditTable').getElementsByTagName('tbody')[0];
+            creditTable.innerHTML = ''; // Limpiar tabla
+
+            if (currentCustomer && currentCustomer.productos) {
+                currentCustomer.productos.forEach(productos => {
+                    const row = creditTable.insertRow();
+                    row.insertCell(0).textContent = productos.producto;
+                    row.insertCell(1).textContent = productos.cantidad;
+                    row.insertCell(2).textContent = productos.costo;
+                });
+            }
+        }
+    </script>
+</body>
+</html>
