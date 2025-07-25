@@ -1,0 +1,146 @@
+---
+site_name: TS-2025 From Good to Great - Enhancing Customer Experience with the Webex Contact Center Flow Designer
+site_description: TS-2025 From Good to Great - Enhancing Customer Experience with the Webex Contact Center Flow Designer
+site_author: Dimitri Bokatov, Yaroslav Bondar
+site_name: Tech Summit Labs
+# must be same as "site_name"
+copyright: Copyright &copy; 2025 Cisco Systems Inc. All Rights Reserved.
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.indexes
+    - navigation.instant
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - content.code.copy
+    - toc.integrate
+    - content.tooltips
+    - content.footnote.tooltips
+    - codehilite
+  custom_dir: docs/overrides
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom      
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  logo: template_assets/webexLogo91.png
+  favicon: template_assets/webex75.png
+extra:
+  generator: false
+extra_css:
+  - stylesheets/extra.css
+extra_javascript:
+  - js/copy-button.js
+  - js/attendee-id.js
+plugins:
+  - search
+  #- with-pdf:
+  #    cover_title: TS-2025
+  #    cover_subtitle: "From Good to Great: Enhancing Customer Experience with the Webex Contact Center Flow Designer"
+  #    cover_logo: template_assets/Cisco-Live-White-Blue-APJC.svg
+  - glightbox:
+      touchNavigation: true
+      loop: false
+      effect: fade
+      slide_effect: slide
+      width: 100%
+      height: auto
+      zoomable: true
+      draggable: false
+      skip_classes:
+      - custom-skip-class-name
+      auto_caption: true
+      caption_position: top   
+markdown_extensions:
+  - md_in_html
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - meta
+  - tables
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Lab Overview: ./main/overview.md
+      - Getting to know your environment: ./main/PreRequisites.md
+###      - Chrome and Webex App Setup: ./main/Browser_and_Desktop_Setup.md 
+      - Choose Your Adventure: ./main/Choose_Your_Adventure.md
+      ## - Flow Designer Overview [To be moved to presentation]: ./main/FlowDesignerOverview.md
+  - CORE TRACK:
+      - Lab Guide:
+            - "Mission 1: Basic Call Routing (Flow Template, TTS, Language)": ./main/CoreTrack_Mission1.md
+            - "Mission 2: Using Business Hours to add flexibility": ./main/CoreTrack_Mission2.md
+            - "Mission 3: Work with Event Flow": ./main/CoreTrack_Mission4.md
+            - "Mission 4: Post Call Survey": ./main/CoreTrack_Mission5.md
+            - "Mission 5: Using Flow Designer Tools": ./main/CoreTrack_Mission6.md
+      - Conclusion: ./main/CoreTrack_Conclusion.md
+  - API TRACK:
+      - Lab Guide:
+            ##- "Advacned Call Routing and Flow Simplification by using API Integration Overview": ./main/Lab2.md
+            - "Introduction to Developer Portal": ./main/APITrack_DeveloperPortal.md
+            - "Mission 1: Emergency config change": ./main/APITrack_Mission1.md
+            - "Mission 2: Routing facilitation": ./main/APITrack_Mission2.md 
+            - "Mission 3: Last Agent Routing": ./main/APITrack_Mission3_AutoCSAT.md
+            - "Mission 4: Routing Returning Callers": ./main/APITrack_Mission4.md
+            - "Mission 5: Personalized Customer Notification with Functions": ./main/APITrack_Mission5_Function.md
+      - Conclusion: ./main/APITrack_Conclusion.md
+  - CALLBACK TRACK:
+      - Lab Guide:
+            - "Mission 1: Basic Call Routing (Flow Template, TTS, Language)": ./main/CallbackTrack_Mission1.md ## Same as CoreTrack Mission1
+            - "Mission 2: Adding Call-back functionality to your flow": ./main/CallbackTrack_Mission2.md ## Same as CoreTrack Mission3
+            - "Mission 3: CallBack on Global Error": ./main/CallbackTrack_Mission3.md
+            - "Mission 4: Preventing Callback duplication": ./main/CallbackTrack_Mission4.md
+      - Conclusion: ./main/CallbackTrack_Conclusion.md
+  - AI TRACK:
+      - Lab Guide:
+            - "Mission 1: AI in Action (Autonomous Agent)": ./main/AIAgentTrack_Mission1.md
+            - "Mission 2: AI in Action (Scripted Agent)": ./main/AIAgentTrack_NewUI_Mission2.md
+            - "Mission 3: Seamless AI to Human Agent Handoffs": ./main/AIAgentTrack_Mission3.md
+            - "Mission 4: Call Drop Summary": ./main/AI_Assistant_CallDropSummary.md
+###            - "Mission 5: AI in Action (Scripted Agent) - Old UI Interface": ./main/AIAgentTrack_Mission5.md
+      - Conclusion: ./main/AIAgentTrack_Conclusion.md
+  - FINAL CHALLENGE:
+      - Troubleshooting Mission:
+            - "Final Challenge: Production flow is failing!": ./main/FinalBossFight_Mission.md
+###            - "Hint for Final Challenge Mission!": ./main/FinalBossFight_Hint1.md
+###            - "Solution Guidance for Final Challenge Fight Mission!": ./main/FinalBossFight_Solution.md
+  - Quick Links: quicklinks.md
+###  - Ask a Question<i class="fa-solid fa-hand" style="color:#63E6BE;"></i>: slido-QA-iFrame.md
+
